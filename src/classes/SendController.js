@@ -1,8 +1,7 @@
-import { doPost, doGet, doDel } from '../utils/requestsUtils';
+const { doPost, doGet, doDel } = require('../utils/requestsUtils');
 
 class SendController {
-  async calcProductFreight(req, res) {
-    const { token } = req.body;
+  async calcProductFreight(token, data) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/shipment/calculate`;
     const header = {
       "Accept": "application/json",
@@ -49,18 +48,17 @@ class SendController {
           weight: 1,
           insurance_value: 30,
           quantity: 1,
-        },
+        }
       ],
     };
 
     const result = await doPost(url, data, header);
-    return res.json({ result });
+    return result;
   }
 
-  async calcPackageFreight(req, res) {
-    const { token } = req.body;
+  async calcPackageFreight(token, data) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/shipment/calculate`;
-    const header ={
+    const header = {
       "Accept": "application/json",
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`,
@@ -85,14 +83,11 @@ class SendController {
         },
         services: "1,2,3,4,7,11"
     };
-
     const result = await doPost(url, data, header);
-    return res.json({ result });
-
+    return result;
   }
 
-  async insertFreightsInCart(req, res) {
-    const { token } = req.body;
+  async insertFreightsInCart(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/cart`
     const header = {
       "Accept": "application/json",
@@ -181,37 +176,32 @@ class SendController {
       }
     }
     const result = await doPost(url, data, header);
-    return res.json({ result });
+    return result;
   }
 
-  async listCart(req, res) {
-    const token = req.body;
+  async listCart(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/cart/6e1c864a-fe48-4ae7-baaa-d6e4888bafd2`;
     const header = {
       "Accept": "application/json",
       "Authorization": `Bearer ${token}`,
     };
-
     const result = await doGet(url, header);
-    return res.json({ result });
+    return result;
   }
 
-  async removeCartItems(req, res) {
-    const { token } = req.body;
+  async removeCartItems(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/cart/6e1c864a-fe48-4ae7-baaa-d6e4888bafd2`;
     const header = {
       "Accept": "application/json",
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`,
     };
-
     const result = await doDel(url, header)
-    return res.json({ result })
+    return result;
 
   }
 
-  async orderCheckout(req, res) {
-    const { token } = req.body;
+  async orderCheckout(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/shipment/checkout`;
     const header = {
       "Accept": "application/json",
@@ -223,13 +213,11 @@ class SendController {
         "9af0b6fd-9ce2-46fe-afa7-5ce4f3f31149"
       ]
     };
-
     const result = await doPost(url, data, header);
-    return res.json({ result });
+    return result;
   }
 
-  async previewTicket(req, res) {
-    const { token } = req.body;
+  async previewTicket(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/shipment/preview`;
     const header = {
       "Accept": "application/json",
@@ -241,14 +229,11 @@ class SendController {
           "9af0b6fd-9ce2-46fe-afa7-5ce4f3f31149"
       ]
     };
-
     const result = await doPost(url, data, header);
-    return res.json({ result });
-
+    return result;
   }
 
-  async generateTicket(req, res) {
-    const { token } = req.body;
+  async generateTicket(token, data) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/shipment/generate`;
     const header = {
       "Accept": "application/json",
@@ -260,14 +245,11 @@ class SendController {
         "9af0b6fd-9ce2-46fe-afa7-5ce4f3f31149"
       ]
     };
-
     const result = await doPost(url, data, header);
-    return res.json({ result });
-
+    return result;
   }
 
-  async printTicket(req, res) {
-    const { token } = req.body;
+  async printTicket(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/shipment/print`;
     const header = {
       "Accept": "application/json",
@@ -281,26 +263,22 @@ class SendController {
         "c2e5eb04-db51-467b-b63e-aae7ba76ae59"
       ]
     };
-
     const result = await doPost(url, data, header);
-    return res.json({ result });
+    return result;
   }
 
-  async searchTicket(req, res) {
-    const { token } = req.body;
+  async searchTicket(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/orders/search?q={id|protocol|tracking|authorization_code|self_tracking}`;
     const header = {
       "Accept": "application/json",
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`,
     };
-
     const result = await doGet(url, header);
-    return res.json({ result });
+    return result;
   }
 
-  async cancelTicket(req, res) {
-    const { token } = req.body;
+  async cancelTicket(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/shipment/cancel`;
     const header = {
       "Accept": "application/json",
@@ -314,32 +292,24 @@ class SendController {
           description: "Descrição do cancelamento"
       }
     };
-
     const result = await doPost(url, data, header);
-    return res.json({ result });
+    return result;
   }
 
-  async verifyTicketCanceability(req, res) {
-    const { orders_ids } = req.body;
+  async verifyTicketCanceability(ordersIds) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/shipment/cancellable`;
     const header = {
       "Accept": "application/json",
       "Content-Type": "application/json",
     }
-
     const data = {
-      orders: orders_ids,
+      orders: ordersIds,
     };
-
-
     const result = await doGet(url, header);
-    return res.json({ result });
-
+    return result;
   }
 
-  async trackShipment(req, res) {
-    const { orders_ids } = req.body;
-    const { token } = req.body;
+  async trackShipment(token, ordersIds) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/shipment/tracking`;
     const header = {
       "Accept": "application/json",
@@ -347,13 +317,11 @@ class SendController {
       "Authorization": `Bearer ${token}`,
     };
     const data = {
-        orders: orders_ids,
+        orders: ordersIds,
     };
-
     const result = await doPost(url, data, header);
-    return res.json({ result });
+    return result;
   }
-
 }
 
-export default new SendController();
+module.exports = new SendController();

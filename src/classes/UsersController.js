@@ -1,8 +1,7 @@
-import { doPost, doGet } from '../utils/requestsUtils';
+const { doPost, doGet } = require('../utils/requestsUtils');
 
 class UsersController {
-  async registerUser(req, res) {
-    const { token } = req.body;
+  async registerUser(token, data) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/register`;
     const header = {
       "Accept": "application/json",
@@ -34,36 +33,30 @@ class UsersController {
       }
     }
     const result = await doPost(url, data, header);
-
-    return res.json({ result });
+    return result;
   }
 
-  async listUserInformation(req, res) {
-    const { token } = req.body;
+  async listUserInformation(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me`;
     const headers = {
       "Accept": "application/json",
       "Authorization": `Bearer ${token}`,
     };
     const result = await doGet(url, headers);
-
-    return res.json({ result });
+    return result;
   }
 
-  async listUserAddress(req, res) {
-    const { token } = req.body;
+  async listUserAddress(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/addresses`;
     const headers = {
       "Accept": "application/json",
       "Authorization": `Bearer ${token}`,
     };
     const result = await doGet(url, headers);
-
-    return res.json({ result });
+    return result;
   }
 
-  async getUserBalance(req, res) {
-    const { token } = req.body;
+  async getUserBalance(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/balance`;
     const headers = {
       "Accept": "application/json",
@@ -71,11 +64,10 @@ class UsersController {
     };
     const result = await doGet(url, headers);
 
-    return res.json({ result });
+    return result;
   }
 
-  async addUserBalance(req, res) {
-    const { token, value } = req.body;
+  async addUserBalance(token, data) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/balance`;
     const headers = {
       "Accept": "application/json",
@@ -89,20 +81,18 @@ class UsersController {
     };
     const result = await doPost(url, data, headers);
 
-    return res.json({ result });
+    return result;
   }
 
-  async listShipments(req, res) {
-    const { token } = req.body;
+  async listShipments(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/orders?status={pending|released|posted|delivered|canceled|undelivered}`;
     const headers = {
       "Accept": "application/json",
       "Authorization": `Bearer ${token}`,
     };
     const result = await doGet(url, headers);
-
-    return res.json({ result });
+    return result;
   }
 }
 
-export default new UsersController();
+module.exports = new UsersController();

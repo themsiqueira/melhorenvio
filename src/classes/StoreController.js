@@ -1,15 +1,13 @@
-import { doPost, doGet} from '../utils/requestsUtils';
+const { doPost, doGet} = require('../utils/requestsUtils');
 
 class StoreController {
-  async registerStore(req, res) {
-    const { token } = req.body;
+  async registerStore(token, data) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/companies`;
     const header = {
       "Accept": "application/json",
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`,
     };
-
     const data = {
         name: "Melhor Loja",
         email: "contato@melhorloja.me",
@@ -18,20 +16,17 @@ class StoreController {
         document: "89.157.108/0001-04",
         state_register: "476.210.979.481"
     }
-
     const result = await doPost(url, data, header);
-    return res.json({ result });
+    return result;
   }
 
-  async saveAddress(req, res) {
-    const { token, id_loja } = req.body;
-    const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/companies/${id_loja}/addresses`;
+  async saveAddress(token, idLoja, data) {
+    const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/companies/${idLoja}/addresses`;
     const header = {
       "Accept": "application/json",
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`,
     };
-
     const data = {
       postal_code: "01010010",
       address: "Av. Teste",
@@ -40,70 +35,57 @@ class StoreController {
       city: "São Paulo",
       state: "SP"
     }
-
     const result = await doPost(url, data, header);
-    return res.json({ result });
+    return result;
   }
 
-  async savePhone(req, res) {
-    const { token, id_loja } = req.body;
-    const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/companies/${id_loja}/phones`;
+  async savePhone(token, idLoja, data) {
+    const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/companies/${idLoja}/phones`;
     const header = {
       "Accept": "application/json",
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`,
     };
-
     const data = {
       type: "mobile",
       phone: "11981778899"
     }
-
     const result = await doPost(url, data, header);
-    return res.json({ result });
+    return result;
   }
 
-  async sendStorePicture(req, res) {
-    const { file } = req;
-    const { token, id_loja } = req.body;
-    const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/companies/${id_loja}/picture`;
+  async sendStorePicture(token, idLoja, data) {
+    const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/companies/${idLoja}/picture`;
     const header = {
       "Accept": "application/json",
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`,
     };
-
     const data = { file };
-
     const result = await doPost(url, data, header);
-    return res.json({ result });
+    return result;
   }
 
-  async listStores(req, res) {
-    const { token } = req.body;
+  async listStores(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/companies`;
     const header = {
       "Accept": "application/json",
       "Authorization": `Bearer ${token}`,
     };
-
     const result = await doGet(url, header);
-    return res.json({ result });
-
+    return result;
   }
 
-  async searchStore(req, res) {
-    const { token, id_loja } = req.body;
-    const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/companies/${id_loja}`;
+  async searchStore(token, idLoja) {
+    const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/companies/${idLoja}`;
     const header = {
       "Accept": "application/json",
       "Authorization": `Bearer ${token}`,
     };
-
     const result = await doGet(url, header);
-    return res.json({ result });
+    return result;
   }
 
 }
 
-export default new StoreController();
+module.exports = new StoreController();

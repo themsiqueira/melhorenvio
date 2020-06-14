@@ -1,10 +1,10 @@
-import { doPost, doGet } from '../utils/requestsUtils';
+const{ doPost, doGet } =  require('../utils/requestsUtils');
 
 class OAuthController {
-  async getOAuth(req, res) {
+  async getOAuth(clientId, redirectUrl) {
     const url = `${process.env.MELHOR_ENVIO_URL}/oauth/authorize?
-    client_id=${process.env.MELHOR_ENVIO_CLIENT_ID}
-    &redirect_uri=${process.env.MELHOR_ENVIO_REDIRECT_URL}
+    client_id=${clientId}
+    &redirect_uri=${redirectUrl}
     &response_type=code&state=teste
     &scope=cart-write transactions-read
     webhooks-read webhooks-write orders-read
@@ -14,46 +14,42 @@ class OAuthController {
     shipping-preview shipping-print shipping-share
     shipping-tracking ecommerce-shipping`;
     const result = await doGet(url);
-    return res.json({ result });
+    return result;
   }
 
-  async getToken(req, res) {
-    const { code } = req.body;
+  async getToken(code, clientSecret, clientId, redirectUrl) {
     const url = `${process.env.MELHOR_ENVIO_URL}/oauth/token`;
     const data = {
       grant_type: 'authorization_code',
-      client_id: process.env.MELHOR_ENVIO_CLIENT_ID,
-      client_secret: process.env.MELHOR_ENVIO_CLIENT_SECRET,
-      redirect_uri: process.env.MELHOR_ENVIO_REDIRECT_URL,
+      client_id: clientId,
+      client_secret: clientSecret,
+      redirect_uri: redirectUrl,
       code,
     };
     const result = await doPost(url, data);
-
-    return res.json({ result });
+    return result;
   }
 
-  async refreshToken(req, res) {
-    const { refresh_token } = req.body;
+  async refreshToken(refreshToken, clientId, clientSecret) {
     const url = `${process.env.MELHOR_ENVIO_URL}/oauth/token`;
     const data = {
       grant_type: 'refresh_token',
       refresh_token,
-      client_id: process.env.MELHOR_ENVIO_CLIENT_ID,
-      client_secret: process.env.MELHOR_ENVIO_CLIENT_SECRET,
+      client_id: clientId,
+      client_secret: clientSecret,
     };
     const result = await doPost(url, data);
-
-    return res.json({ result });
+    return result;
   }
 
-  async getAppInformations(req, res) {
-    const { token } = req.body;
+  async getAppInformations(token) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/shipment/app-settings`;
-    const header = `
-    Accept: application/json
-    Authorization: Bearer ${token}`;
+    const header = {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
     const result = await doGet(url, header);
-    return res.json({ result });
+    return result;
   }
 }
 

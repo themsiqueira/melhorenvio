@@ -1,21 +1,32 @@
 {
-  "name": "melhornvio",
-  "version": "1.0.0",
+  "name": "melhor-envio-js",
+  "version": "0.0.1",
+  "description": "A package to integrate with melhor envio in javascript",
   "main": "index.js",
-  "license": "MIT",
+  "license": "ISC",
   "scripts": {
-    "dev": "nodemon src/server.js",
-    "build": "sucrase ./src -d ./dist --transforms imports"
+    "test": "jest --watchAll"
   },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "pixfy",
+    "melhor-envio"
+  ],
+  "private": true,
+  "author": [
+    "themsiqueirap",
+    "luizotavio"
+  ],
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
   "dependencies": {
     "axios": "^0.19.2",
-    "dotenv": "^8.0.0",
-    "express": "^4.17.1",
-    "express-async-errors": "^3.1.1",
-    "pg": "^7.12.1",
-    "pg-hstore": "^2.3.3",
-    "sequelize": "^5.9.4",
-    "youch": "^2.0.10"
+    "yup": "^0.29.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
@@ -23,9 +34,6 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-prettier": "^3.1.0",
-    "nodemon": "^1.19.1",
-    "prettier": "^1.18.2",
-    "sequelize-cli": "^5.5.0",
-    "sucrase": "^3.10.1"
+    "prettier": "^1.18.2"
   }
 }
