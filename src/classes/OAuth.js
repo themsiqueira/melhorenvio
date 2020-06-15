@@ -16,36 +16,19 @@ class OAuth {
     return await doGet(route);
   }
 
-  async getToken(code, clientSecret, clientId, redirectUrl) {
+  async getToken(code, data) {
     const route = `/oauth/token`;
-    const data = {
-      grant_type: 'authorization_code',
-      client_id: clientId,
-      client_secret: clientSecret,
-      redirect_uri: redirectUrl,
-      code,
-    };
     return await doPost(route, data);
   }
 
-  async refreshToken(refreshToken, clientId, clientSecret) {
+  async refreshToken(refreshToken, data) {
     const route = `/oauth/token`;
-    const data = {
-      grant_type: 'refresh_token',
-      refresh_token,
-      client_id: clientId,
-      client_secret: clientSecret,
-    };
     return await doPost(route, data);
   }
 
   async getAppInformations(token) {
     const route = `/api/v2/me/shipment/app-settings`;
-    const header = {
-      Accept: 'application/json',
-      Authorization: `Bearer ${token}`,
-    };
-    return await doGet(route, header);
+    return await doGet(route, token);
   }
 }
 

@@ -21,9 +21,9 @@ class Send {
     return await doGet(route, token);
   }
 
-  async removeCartItems(token) {
+  async removeCartItems(token, data) {
     const route = `/api/v2/me/cart/6e1c864a-fe48-4ae7-baaa-d6e4888bafd2`;
-    return await doDel(route, token)
+    return await doDel(route, data, token)
 
   }
 
@@ -59,7 +59,7 @@ class Send {
 
   async verifyTicketCanceability(data, token) {
     const route = `/api/v2/me/shipment/cancellable`;
-    return await doGet(route, token);
+    return await doGet(route, data, token);
   }
 
   async trackShipment(token, data) {

@@ -20,14 +20,14 @@ export async function doPost(route, data, token) {
   return result.data;
 }
 
-export async function doGet(route, token) {
+export async function doGet(route, data = null, token = null) {
   const headers = {
     'Accept': 'application/json',
     'Authorization': `Bearer ${token}`,
   };
 
   const result = await axios
-    .get(`${url}${route}`, { headers })
+    .get(`${url}${route}`, { headers }, data)
     .then(response => {
       return response;
     })

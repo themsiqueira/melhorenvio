@@ -1,4 +1,4 @@
-const { doPost, doGet } =  require('../utils/requestsUtils');
+const { doGet } =  require('../utils/requestsUtils');
 
 class Carriers {
   async listCariers() {
