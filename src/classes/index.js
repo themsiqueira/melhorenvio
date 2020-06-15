@@ -1,8 +1,8 @@
-const OAuth = require('./OAuthController');
-const Send = require('./SendController');
-const Store = require('./StoreController');
-const Carriers = require('./CarriersController');
-const Users = require('./UsersController');
+const OAuth = require('./OAuth');
+const Send = require('./Send');
+const Store = require('./Store');
+const Carriers = require('./Carriers');
+const Users = require('./Users');
 
 module.exports = {
     OAuth,
