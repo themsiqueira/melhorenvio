@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const url = 'https://sandbox.melhorenvio.com.br';
 
-export async function doPost(route, data, token) {
+const doPost = async (route, data, token) => {
   const headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ export async function doPost(route, data, token) {
   return result.data;
 }
 
-export async function doGet(route, data = null, token = null) {
+const doGet = async (route, data = null, token = null) => {
   const headers = {
     'Accept': 'application/json',
     'Authorization': `Bearer ${token}`,
@@ -38,7 +38,7 @@ export async function doGet(route, data = null, token = null) {
   return result.data;
 }
 
-export async function doDel(route, data = null, header = null) {
+const doDel = async (route, data = null, header = null) => {
   const result = await axios
     .delete(`${url}${route}`, data, header)
     .then(response => {
@@ -49,4 +49,10 @@ export async function doDel(route, data = null, header = null) {
     });
 
   return result.data;
+}
+
+module.exports = {
+  doPost,
+  doGet,
+  doDel
 }
