@@ -13,7 +13,8 @@ class OAuth {
     shipping-checkout shipping-companies shipping-generate
     shipping-preview shipping-print shipping-share
     shipping-tracking ecommerce-shipping`;
-    return await doGet(route);
+    const result = await doGet(route);
+    return result;
   }
 
   async getToken(code, data) {
