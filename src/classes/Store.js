@@ -1,6 +1,6 @@
 const { doPost, doGet} = require('../utils/requestsUtils');
 
-class StoreController {
+class Store {
   async registerStore(token, data) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/companies`;
     const header = {
@@ -88,4 +88,4 @@ class StoreController {
 
 }
 
-module.exports = new StoreController();
+module.exports = new Store();

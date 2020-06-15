@@ -1,6 +1,6 @@
 const { doPost, doGet, doDel } = require('../utils/requestsUtils');
 
-class SendController {
+class Send {
   async calcProductFreight(token, data) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/shipment/calculate`;
     const header = {
@@ -51,7 +51,6 @@ class SendController {
         }
       ],
     };
-
     const result = await doPost(url, data, header);
     return result;
   }
@@ -324,4 +323,4 @@ class SendController {
   }
 }
 
-module.exports = new SendController();
+module.exports = new Send();

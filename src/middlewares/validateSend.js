@@ -131,18 +131,31 @@ const validationInsertFreightsInCart = async (data) => {
   return true;
 };
 
-const data = {
-  "options": {
+const validationCalcPackageFreight = async (data) => {
+  const schema = Yup.object().shape({
+    from: Yup.object.shape({
+      postal_code: Yup.string().required(),
+    }),
+    to: Yup.object.shape({
+      postal_code: Yup.string().required(),
+    }),
+    options: Yup.object.shape({
+      insurance_value: Yup.number().required(),
+      receipt: Yup.boolean().required(),
+      own_hand: Yup.boolean().required(),
+    }),
+    services: Yup.string().required(),
+    package: Yup.array.of(Yup.object.shape({
+      width: Yup.number().required(),
+      height: Yup.number().required(),
+      length: Yup.number().required(),
+      weight: Yup.number().required(),
+    }))
+  });
 
-      invoice: {
-          key: "31190307586261000184550010000092481404848162"
-      },
-      platform: "Nome da Plataforma",
-      tags: [
-          {
-              tag: "Identificação do pedido na plataforma, exemplo: 1000007",
-              url: "Link direto para o pedido na plataforma, se possível, caso contrário pode ser passado o valor null"
-          }
-      ]
+  if (!(await schema.isValid(data))) {
+    return false;
   }
-}
+
+  return true;
+};

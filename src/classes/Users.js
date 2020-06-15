@@ -1,6 +1,6 @@
 const { doPost, doGet } = require('../utils/requestsUtils');
 
-class UsersController {
+class Users {
   async registerUser(token, data) {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/register`;
     const header = {
@@ -95,4 +95,4 @@ class UsersController {
   }
 }
 
-module.exports = new UsersController();
+module.exports = new Users();

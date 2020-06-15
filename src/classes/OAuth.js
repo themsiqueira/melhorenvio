@@ -1,6 +1,6 @@
 const{ doPost, doGet } =  require('../utils/requestsUtils');
 
-class OAuthController {
+class OAuth {
   async getOAuth(clientId, redirectUrl) {
     const url = `${process.env.MELHOR_ENVIO_URL}/oauth/authorize?
     client_id=${clientId}
@@ -53,4 +53,4 @@ class OAuthController {
   }
 }
 
-export default new OAuthController();
+export default new OAuth();

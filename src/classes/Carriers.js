@@ -1,6 +1,6 @@
 const { doPost, doGet } =  require('../utils/requestsUtils');
 
-class CarriersController {
+class Carriers {
   async listCariers() {
     const url = `${process.env.MELHOR_ENVIO_URL}/api/v2/me/shipment/companies`;
     const result = await doGet(url);
@@ -47,4 +47,4 @@ class CarriersController {
   }
 }
 
-module.exports = new CarriersController();
+module.exports = new Carriers();
