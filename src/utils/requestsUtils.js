@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const url = 'https://sandbox.melhorenvio.com.br';
 
