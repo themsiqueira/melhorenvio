@@ -32,4 +32,4 @@ class OAuth {
   }
 }
 
-export default new OAuth();
+module.exports = new OAuth();

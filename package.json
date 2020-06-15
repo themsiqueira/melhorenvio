@@ -15,11 +15,8 @@
     "pixfy",
     "melhor-envio"
   ],
-  "private": true,
-  "author": [
-    "themsiqueirap",
-    "luizotavio"
-  ],
+  "private": false,
+  "author": "themsiqueirap",
   "bugs": {
     "url": ""
   },
