@@ -1,34 +1,50 @@
-const { doPost, doGet} = require('../utils/requestsUtils');
-
 class Store {
-  async registerStore(token, data) {
-    const route = `/api/v2/me/companies`;
-    return await doPost(route, data, token);
+  routePath = 'api/v2/me/companies'
+
+  async signup() {
+    const result = await RequestUtils.doPost({
+      route: `${this.routePath}`,
+      data,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return result
   }
 
-  async saveAddress(token, idLoja, data) {
-    const route = `/api/v2/me/companies/${idLoja}/addresses`;
-    return await doPost(route, data, token);
+  async saveAddress({id, data, token}) {
+    const result = await RequestUtils.doPost({
+      route: `${this.routePath}/${id}/addresses`,
+      data,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return result
   }
 
-  async savePhone(token, idLoja, data) {
-    const route = `/api/v2/me/companies/${idLoja}/phones`;
-    return await doPost(route, data, token);
+  async savePhone({id, data, token}) {
+    const result = await RequestUtils.doPost({
+      route: `${this.routePath}/${id}/phones`,
+      data,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return result
   }
 
-  async sendStorePicture(token, idLoja, data) {
-    const route = `/api/v2/me/companies/${idLoja}/picture`;
-    return await doPost(route, data, token);
-  }
-
-  async listStores(token) {
-    const route = `/api/v2/me/companies`;
-    return await doGet(route, token);
-  }
-
-  async searchStore(token, idLoja) {
-    const route = `/api/v2/me/companies/${idLoja}`;
-    return await doGet(route, token);
+  async sendImage({id, form, token}) {
+    const result = await RequestUtils.doPostWithFormData({
+      route: `${this.routePath}/${id}/picture`,
+      form,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 }
 

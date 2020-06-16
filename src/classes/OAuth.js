@@ -1,39 +1,47 @@
-const{ doPost, doGet } =  require('../utils/requestsUtils');
+const RequestRequestUtils = require('../utils/RequestRequestUtils');
+const FormData = require('form-data');
 
-  const getOAuth = async (clientId, redirectUrl) => {
-    const route = `/oauth/authorize?
-    client_id=${clientId}
-    &redirect_uri=${redirectUrl}
-    &response_type=code&state=teste
-    &scope=cart-write transactions-read
-    webhooks-read webhooks-write orders-read
-    products-read products-write
-    purchases-read shipping-calculate shipping-cancel
-    shipping-checkout shipping-companies shipping-generate
-    shipping-preview shipping-print shipping-share
-    shipping-tracking ecommerce-shipping`;
-    const result = await doGet(route);
-    return result;
-  }
+class OAuth {
+    async getToken(data){
+        const route = '/oauth/token'
+        const headers = {
+            Accept: 'application/json'
+        }
+        const form = new FormData();
+        form.append('grant_type', 'authorization_code');
+        form.append('client_id', data.clientId);
+        form.append('client_secret', data.clientSecret);
+        form.append('redirect_uri', data.redirectUri);
+        form.append('code', '');
 
-  const getToken = async (code, data) => {
-    const route = `/oauth/token`;
-    return await doPost(route, data);
-  }
+        const result = await RequestRequestUtils.doPostWithFormData({route, form, headers});
+        return result;
+    }
 
-  const refreshToken = async (refreshToken, data) => {
-    const route = `/oauth/token`;
-    return await doPost(route, data);
-  }
+    async refreshToken(data){
+        const route = '/oauth/token'
+        const headers = {
+            Accept: 'application/json'
+        }
+        const form = new FormData();
+        form.append('grant_type', 'refresh_token');
+        form.append('refresh_token', data.refreshToken);
+        form.append('client_id', data.clientId);
+        form.append('client_secret', data.clientSecret);
 
-  const getAppInformations = async (token) => {
-    const route = `/api/v2/me/shipment/app-settings`;
-    return await doGet(route, token);
-  }
+        const result = await RequestRequestUtils.doPostWithFormData({route, form, headers});
+        return result;
+    }
 
-module.exports = {
-  getOAuth,
-  getToken,
-  refreshToken,
-  getAppInformations
-};
+    async listAppInformation(token){
+        const route = '/api/v2/me/shipment/app-settings'
+        const headers = {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+        const result = await RequestRequestUtils.doGet({route, headers});
+        return result;
+    }
+}
+
+module.exports = new OAuth();

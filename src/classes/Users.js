@@ -1,35 +1,63 @@
-const { doPost, doGet } = require('../utils/requestsUtils');
+const RequestUtils = require('../Utils/RequestRequestUtils');
 
 class Users {
-  async registerUser(token, data) {
-    const route = `/api/v2/register`;
-    return await doPost(route, data, token);
+  routePath = '/api/v2'
+
+  async signup({ data, token }) {
+    const result = await RequestUtils.doPost({
+      route: `${this.routePath}/register`,
+      data,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return result
   }
 
   async listUserInformation(token) {
-    const route = `/api/v2/me`;
-    return await doGet(route);
+    const result = await RequestUtils.doGet({
+      route: `${this.routePath}/me`,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return result
   }
 
   async listUserAddress(token) {
-    const route = `/api/v2/me/addresses`;
-    return await doGet(route, token);
+    const result = await RequestUtils.doGet({
+      route: `${this.routePath}/me/addresses`,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return result
   }
 
-  async getUserBalance(token) {
-    const route = `/api/v2/me/balance`;
-    return await doGet(route, token);
+  async userBalance(token) {
+    const result = await RequestUtils.doGet({
+      route: `${this.routePath}/me/balance`,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return result
   }
 
-  async addUserBalance(token, data) {
-    const route = `/api/v2/me/balance`;
-    return await doPost(route, data, token);
-  }
+  async insertBalanceWallet({data, token}) {
+    const result = await RequestUtils.doPost({
+      route: `${this.routePath}/register`,
+      data,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
 
-  async listShipments(token) {
-    const route = `/api/v2/me/orders?status={pending|released|posted|delivered|canceled|undelivered}`;
-    return await doGet(route, token);
+    return result
   }
 }
-
 module.exports = new Users();

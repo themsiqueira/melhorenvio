@@ -1,42 +1,66 @@
-const { doGet } =  require('../utils/requestsUtils');
+const RequestUtils = require('../Utils/RequestRequestUtils');
 
 class Carriers {
-  async listCariers() {
-    const route = '/api/v2/me/shipment/companies';
-    return await doGet(route);
-  }
+  routePath = '/api/v2/me/shipment';
+  
+  async listCarriers() {
+    const result = await RequestUtils.doGet({
+      route: `${this.routePath}/companies/`
+    })
 
-  async listCarierInformation(idTransportadora) {
-    const route = `/api/v2/me/shipment/companies/${idTransportadora}`;
-    return await doGet(route);
-  }
+    return result
+  },
+
+  async listCarrierInformation(id) {
+    const result = await RequestUtils.doGet({
+      route: `${this.routePath}/companies/${id}`
+    })
+
+    return result
+  },
 
   async listServices() {
-    const route = '/api/v2/me/shipment/services';
-    return await doGet(route);
-  }
+    const result = await RequestUtils.doGet({
+      route: `${this.routePath}/services/`
+    })
 
-  async listServiceInformation(idServico) {
-    const route = `/api/v2/me/shipment/services/${idServico}`;
-    return await doGet(route);
-  }
+    return result
+  },
+
+  async listServiceInformation(id) {
+    const result = await RequestUtils.doGet({ 
+      route: `${this.routePath}/services/${id}`
+    })
+
+    return result
+  },
 
   async listAgencies() {
-    const route = '/api/v2/me/shipment/agencies';
-    return await doGet(route);
-  }
+    const result = await RequestUtils.doGet({
+      route: `${this.routePath}/agencies/`
+    })
 
-  async listAgencieInformation(idAgencia) {
-    const route = `/api/v2/me/shipment/agencies/${idAgencia}`;
-    return await doGet(route);
-  }
+    return result
+  },
 
-  async listAgencieByFilter(idTransportadora, uf, cidade) {
-    const route = `/api/v2/me/shipment/agencies?company=${idTransportadora}&country=BR&state=${uf}&city=${cidade}`;
-    const header = {
-      "Content-Type": "application/x-www-form-urlencoded",
-    };
-    return await doGet(route, header);
+  async listAgencyInformation() {
+    const result = await RequestUtils.doGet({ 
+      route: `${this.routePath}/agencies/${id}`
+    })
+
+    return result
+  },
+
+  async listFilterAgency(params) {
+    const result =  RequestUtils.doGet({
+      route: `${this.routePath}/services/`,
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      query: params
+    })
+    
+    return result
   }
 }
 

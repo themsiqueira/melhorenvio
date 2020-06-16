@@ -1,5 +1,5 @@
 {
-  "name": "melhor-envio-js",
+  "name": "melhor-envio-integration",
   "version": "0.0.6",
   "description": "A package to integrate with melhor envio in javascript",
   "main": "index.js",
@@ -23,6 +23,8 @@
   "homepage": "",
   "dependencies": {
     "axios": "^0.19.2",
+    "esm": "^3.2.25",
+    "form-data": "^3.0.0",
     "yup": "^0.29.1"
   },
   "devDependencies": {

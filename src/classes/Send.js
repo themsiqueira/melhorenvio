@@ -1,71 +1,154 @@
-const { doPost, doGet, doDel } = require('../utils/requestsUtils');
-
+const RequestRequestUtils = require('../utils/RequestRequestUtils');
+const FormData = require('form-data');
 class Send {
-  async calcProductFreight(token, data) {
-    const route = `/api/v2/me/shipment/calculate`;
-    return await doPost(route, data, token);
-  }
+    async calcFreights(data, token){
+        const route = '/api/v2/me/shipment/calculate';
+        const headers = {
+            Accept: 'application/json',
+            ContentType: 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const result = await RequestRequestUtils.doPost({route, data, headers});
+        return result;
+    }
 
-  async calcPackageFreight(token, data) {
-    const route = `/api/v2/me/shipment/calculate`;
-    return await doPost(route, data, token);
-  }
+    async insertFreightsOnCart(data, token){
+        const route = '/api/v2/me/cart';
+        const headers = {
+            Accept: 'application/json',
+            ContentType: 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const result = await RequestRequestUtils.doPost({route, data, headers});
+        return result;
+    }
 
-  async insertFreightsInCart(token, data) {
-    const route = `/api/v2/me/cart`
-    return await doPost(route, data, token);
-  }
+    async listCart(token){
+        const route = '/api/v2/me/cart';
+        const headers = {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const result = await RequestRequestUtils.doGet({route, headers});
+        return result;
+    }
 
-  async listCart(token) {
-    const route = `/api/v2/me/cart/6e1c864a-fe48-4ae7-baaa-d6e4888bafd2`;
-    return await doGet(route, token);
-  }
+    async getItemCartInformation(itemId, token){
+        const route = `/api/v2/me/cart/${itemId}`;
+        const headers = {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const result = await RequestRequestUtils.doGet({route, headers});
+        return result;
+    }
 
-  async removeCartItems(token, data) {
-    const route = `/api/v2/me/cart/6e1c864a-fe48-4ae7-baaa-d6e4888bafd2`;
-    return await doDel(route, data, token)
+    async removeItemFromCart(itemId, token){
+        const route = `/api/v2/me/cart/${itemId}`;
+        const headers = {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const result = await RequestRequestUtils.doGet({route, headers});
+        return result;
+    }
 
-  }
+    async checkoutOrders(data, token){
+        const route = `/api/v2/me/shipment/checkout`;
+        const headers = {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const result = await RequestRequestUtils.doPost({route, data, headers});
+        return result;
+    }
 
-  async orderCheckout(token, data) {
-    const route = `/api/v2/me/shipment/checkout`;
-    return await doPost(route, data, token);
-  }
+    async shipmentPreview(data, token){
+        const route = `/api/v2/me/shipment/preview`;
+        const headers = {
+            Accept: 'application/json',
+            ContentType: 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const result = await RequestRequestUtils.doPost({route, data, headers});
+        return result;
+    }
 
-  async previewTicket(token, data) {
-    const route = `/api/v2/me/shipment/preview`;
-    return await doPost(route, data, token);
-  }
+    async shipmentPreview(data, token){
+        const route = `/api/v2/me/shipment/preview`;
+        const headers = {
+            Accept: 'application/json',
+            ContentType: 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const result = await RequestRequestUtils.doPost({route, data, headers});
+        return result;
+    }
 
-  async generateTicket(token, data) {
-    const route = `/api/v2/me/shipment/generate`;
-    return await doPost(route, data, token);
-  }
+    async shipmentGenerate(token){
+        const route = `/api/v2/me/shipment/generate`;
+        const headers = {
+            Accept: 'application/json',
+            ContentType: 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const result = await RequestRequestUtils.doPost({route, data, headers});
+        return result;
+    }
 
-  async printTicket(token, data) {
-    const route = `/api/v2/me/shipment/print`;
-    return await doPost(route, data, token);
-  }
+    async shipmentPrint(token){
+        const route = `/api/v2/me/shipment/generate`;
+        const headers = {
+            Accept: 'application/json',
+            ContentType: 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const result = await RequestRequestUtils.doPost({route, data, headers});
+        return result;
+    }
 
-  async searchTicket(token) {
-    const route = `/api/v2/me/orders/search?q={id|protocol|tracking|authorization_code|self_tracking}`;
-    return await doGet(route, token);
-  }
+    async searchOrders(token){
+        const route = `/api/v2/me/orders/search`;
+        const headers = {
+            Accept: 'application/json',
+            ContentType: 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const result = await RequestRequestUtils.doGet({route, query, headers});
+        return result;
+    }
 
-  async cancelTicket(token, data) {
-    const route = `/api/v2/me/shipment/cancel`;
-    return await doPost(route, data, token);
-  }
+    async cancelShipment({token, data}){
+        const route = `/api/v2/me/shipment/cancel`;
+        const headers = {
+            Accept: 'application/json',
+            ContentType: 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const result = await RequestRequestUtils.doPost({route, data, headers});
+        return result;
+    }
 
-  async verifyTicketCanceability(data, token) {
-    const route = `/api/v2/me/shipment/cancellable`;
-    return await doGet(route, data, token);
-  }
+    async cancellableShipment({ data }){
+        const route = `/api/v2/me/shipment/cancellable`;
+        const headers = {
+            Accept: 'application/json',
+            ContentType: 'application/json',
+        }
+        const result = await RequestRequestUtils.doGet({route, data, headers});
+        return result;
+    }
 
-  async trackShipment(token, data) {
-    const route = `/api/v2/me/shipment/tracking`;
-    return await doPost(route, data, token);
-  }
+    async shipmentTracking({ data, token }){
+        const route = `/api/v2/me/shipment/tracking`;
+        const headers = {
+            Accept: 'application/json',
+            ContentType: 'application/json',
+            Authorization: `Bearer ${token}`,
+        }
+        const result = await RequestRequestUtils.doPost({route, data, headers});
+        return result;
+    }
 }
 
 module.exports = new Send();
