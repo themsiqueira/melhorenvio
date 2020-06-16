@@ -2,6 +2,15 @@ const RequestRequestUtils = require('../utils/RequestRequestUtils');
 const FormData = require('form-data');
 
 class OAuth {
+    async getAuthorization(query){
+        const route = '/oauth/authorize'
+        const headers = {
+            Accept: 'application/json'
+        }
+        const result = await RequestRequestUtils.doGet({route, query, headers});
+        return result;
+    }
+
     async getToken(data){
         const route = '/oauth/token'
         const headers = {

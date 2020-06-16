@@ -37,7 +37,10 @@ class Store {
     return result
   }
 
-  async sendImage({id, form, token}) {
+  async sendImage({id, data, token}) {
+    const form = new FormData();
+    form.append('file', data);
+
     const result = await RequestUtils.doPostWithFormData({
       route: `${this.routePath}/${id}/picture`,
       form,
