@@ -45,6 +45,30 @@ class Store {
         Authorization: `Bearer ${token}`
       }
     })
+
+    return result
+  }
+
+  async listStores(token) {
+    const result = await RequestUtils.doGet({
+      route: `${this.routePath}`,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return result
+  }
+
+  async visualizeStore({id, token}) {
+    const result = await RequestUtils.doGet({
+      route: `${this.routePath}/${id}`,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return result
   }
 }
 
