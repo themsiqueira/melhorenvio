@@ -1,6 +1,6 @@
 {
   "name": "melhor-envio-js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A package to integrate with melhor envio in javascript",
   "main": "index.js",
   "license": "ISC",

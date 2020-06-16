@@ -1,7 +1,6 @@
 const{ doPost, doGet } =  require('../utils/requestsUtils');
 
-class OAuth {
-  async getOAuth(clientId, redirectUrl) {
+  const getOAuth = async (clientId, redirectUrl) => {
     const route = `/oauth/authorize?
     client_id=${clientId}
     &redirect_uri=${redirectUrl}
@@ -17,20 +16,24 @@ class OAuth {
     return result;
   }
 
-  async getToken(code, data) {
+  const getToken = async (code, data) => {
     const route = `/oauth/token`;
     return await doPost(route, data);
   }
 
-  async refreshToken(refreshToken, data) {
+  const refreshToken = async (refreshToken, data) => {
     const route = `/oauth/token`;
     return await doPost(route, data);
   }
 
-  async getAppInformations(token) {
+  const getAppInformations = async (token) => {
     const route = `/api/v2/me/shipment/app-settings`;
     return await doGet(route, token);
   }
-}
 
-module.exports = new OAuth();
+module.exports = {
+  getOAuth,
+  getToken,
+  refreshToken,
+  getAppInformations
+};
