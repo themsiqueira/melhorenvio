@@ -1,4 +1,4 @@
-const RequestUtils = require('../Utils/RequestRequestUtils');
+const RequestUtils = require('../Utils/RequestUtils');
 
 class Users {
   routePath = '/api/v2'

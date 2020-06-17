@@ -1,4 +1,4 @@
-const RequestRequestUtils = require('../utils/RequestRequestUtils');
+const RequestUtils = require('../utils/RequestUtils');
 const FormData = require('form-data');
 class Send {
     async calcFreights(data, token){
@@ -8,7 +8,7 @@ class Send {
             ContentType: 'application/json',
             Authorization: `Bearer ${token}`,
         }
-        const result = await RequestRequestUtils.doPost({route, data, headers});
+        const result = await RequestUtils.doPost({route, data, headers});
         return result;
     }
 
@@ -19,7 +19,7 @@ class Send {
             ContentType: 'application/json',
             Authorization: `Bearer ${token}`,
         }
-        const result = await RequestRequestUtils.doPost({route, data, headers});
+        const result = await RequestUtils.doPost({route, data, headers});
         return result;
     }
 
@@ -29,7 +29,7 @@ class Send {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`,
         }
-        const result = await RequestRequestUtils.doGet({route, headers});
+        const result = await RequestUtils.doGet({route, headers});
         return result;
     }
 
@@ -39,7 +39,7 @@ class Send {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`,
         }
-        const result = await RequestRequestUtils.doGet({route, headers});
+        const result = await RequestUtils.doGet({route, headers});
         return result;
     }
 
@@ -49,7 +49,7 @@ class Send {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`,
         }
-        const result = await RequestRequestUtils.doGet({route, headers});
+        const result = await RequestUtils.doGet({route, headers});
         return result;
     }
 
@@ -59,7 +59,7 @@ class Send {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`,
         }
-        const result = await RequestRequestUtils.doPost({route, data, headers});
+        const result = await RequestUtils.doPost({route, data, headers});
         return result;
     }
 
@@ -70,7 +70,7 @@ class Send {
             ContentType: 'application/json',
             Authorization: `Bearer ${token}`,
         }
-        const result = await RequestRequestUtils.doPost({route, data, headers});
+        const result = await RequestUtils.doPost({route, data, headers});
         return result;
     }
 
@@ -81,7 +81,7 @@ class Send {
             ContentType: 'application/json',
             Authorization: `Bearer ${token}`,
         }
-        const result = await RequestRequestUtils.doPost({route, data, headers});
+        const result = await RequestUtils.doPost({route, data, headers});
         return result;
     }
 
@@ -92,7 +92,7 @@ class Send {
             ContentType: 'application/json',
             Authorization: `Bearer ${token}`,
         }
-        const result = await RequestRequestUtils.doPost({route, data, headers});
+        const result = await RequestUtils.doPost({route, data, headers});
         return result;
     }
 
@@ -103,7 +103,7 @@ class Send {
             ContentType: 'application/json',
             Authorization: `Bearer ${token}`,
         }
-        const result = await RequestRequestUtils.doPost({route, data, headers});
+        const result = await RequestUtils.doPost({route, data, headers});
         return result;
     }
 
@@ -114,7 +114,7 @@ class Send {
             ContentType: 'application/json',
             Authorization: `Bearer ${token}`,
         }
-        const result = await RequestRequestUtils.doGet({route, query, headers});
+        const result = await RequestUtils.doGet({route, query, headers});
         return result;
     }
 
@@ -125,7 +125,7 @@ class Send {
             ContentType: 'application/json',
             Authorization: `Bearer ${token}`,
         }
-        const result = await RequestRequestUtils.doPost({route, data, headers});
+        const result = await RequestUtils.doPost({route, data, headers});
         return result;
     }
 
@@ -135,7 +135,7 @@ class Send {
             Accept: 'application/json',
             ContentType: 'application/json',
         }
-        const result = await RequestRequestUtils.doGet({route, data, headers});
+        const result = await RequestUtils.doGet({route, data, headers});
         return result;
     }
 
@@ -146,7 +146,7 @@ class Send {
             ContentType: 'application/json',
             Authorization: `Bearer ${token}`,
         }
-        const result = await RequestRequestUtils.doPost({route, data, headers});
+        const result = await RequestUtils.doPost({route, data, headers});
         return result;
     }
 }

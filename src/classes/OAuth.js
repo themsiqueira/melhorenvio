@@ -1,4 +1,4 @@
-const RequestRequestUtils = require('../utils/RequestRequestUtils');
+const RequestUtils = require('../utils/RequestUtils');
 const FormData = require('form-data');
 
 class OAuth {
@@ -7,7 +7,7 @@ class OAuth {
         const headers = {
             Accept: 'application/json'
         }
-        const result = await RequestRequestUtils.doGet({route, query, headers});
+        const result = await RequestUtils.doGet({route, query, headers});
         return result;
     }
 
@@ -23,7 +23,7 @@ class OAuth {
         form.append('redirect_uri', data.redirectUri);
         form.append('code', '');
 
-        const result = await RequestRequestUtils.doPostWithFormData({route, form, headers});
+        const result = await RequestUtils.doPostWithFormData({route, form, headers});
         return result;
     }
 
@@ -38,7 +38,7 @@ class OAuth {
         form.append('client_id', data.clientId);
         form.append('client_secret', data.clientSecret);
 
-        const result = await RequestRequestUtils.doPostWithFormData({route, form, headers});
+        const result = await RequestUtils.doPostWithFormData({route, form, headers});
         return result;
     }
 
@@ -48,7 +48,7 @@ class OAuth {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`
         }
-        const result = await RequestRequestUtils.doGet({route, headers});
+        const result = await RequestUtils.doGet({route, headers});
         return result;
     }
 }

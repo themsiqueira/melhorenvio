@@ -1,4 +1,4 @@
-const RequestUtils = require('../Utils/RequestRequestUtils');
+const RequestUtils = require('../Utils/RequestUtils');
 
 class Carriers {
   routePath = '/api/v2/me/shipment';
