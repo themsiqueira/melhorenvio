@@ -1,6 +1,6 @@
 {
   "name": "melhor-envio-integration",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A package to integrate with melhor envio in javascript",
   "main": "index.js",
   "license": "ISC",
@@ -13,7 +13,8 @@
   },
   "keywords": [
     "pixfy",
-    "melhor-envio"
+    "melhor-envio",
+    "integration"
   ],
   "private": false,
   "author": "themsiqueirap",
