@@ -1,4 +1,4 @@
-const RequestUtils = require('../Utils/RequestUtils');
+const RequestUtils = require('../utils/RequestUtils');
 
 class Carriers {
   routePath = '/api/v2/me/shipment';
@@ -9,7 +9,7 @@ class Carriers {
     })
 
     return result
-  },
+  }
 
   async listCarrierInformation(id) {
     const result = await RequestUtils.doGet({
@@ -17,7 +17,7 @@ class Carriers {
     })
 
     return result
-  },
+  }
 
   async listServices() {
     const result = await RequestUtils.doGet({
@@ -25,7 +25,7 @@ class Carriers {
     })
 
     return result
-  },
+  }
 
   async listServiceInformation(id) {
     const result = await RequestUtils.doGet({ 
@@ -33,7 +33,7 @@ class Carriers {
     })
 
     return result
-  },
+  }
 
   async listAgencies() {
     const result = await RequestUtils.doGet({
@@ -41,7 +41,7 @@ class Carriers {
     })
 
     return result
-  },
+  }
 
   async listAgencyInformation() {
     const result = await RequestUtils.doGet({ 
@@ -49,7 +49,7 @@ class Carriers {
     })
 
     return result
-  },
+  }
 
   async listFilterAgency(params) {
     const result =  RequestUtils.doGet({
