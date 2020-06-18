@@ -21,7 +21,7 @@ class OAuth {
         form.append('client_id', data.clientId);
         form.append('client_secret', data.clientSecret);
         form.append('redirect_uri', data.redirectUri);
-        form.append('code', '');
+        form.append('code', data.code);
 
         const result = await RequestUtils.doPostWithFormData({route, form, headers});
         return result;
