@@ -162,7 +162,6 @@ class Send {
         return result;
     }
 
-
     async shipmentTracking({ data, token }){
         const result = await RequestUtils.doRequest({
             method: 'post',
