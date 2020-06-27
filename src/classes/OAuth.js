@@ -5,7 +5,7 @@ class OAuth {
     async getAuthorization({ query }){
         const result = await RequestUtils.doRequest({
             method: 'get',
-            route: `oauth/authorize?client_id=${query.clientId}&redirect_uri=${query.redirectUri}&response_type=code&state=teste&scope=${query.scope}`, 
+            route: `oauth/authorize?client_id=${query.clientId}&redirect_uri=${query.redirectUri}&response_type=${query.responseType}&state=teste&scope=${query.scope}`, 
         });
         return result;
     }
