@@ -1,9 +1,9 @@
 const RequestUtils = require('../utils/RequestUtils');
 const FormData = require('form-data');
 class Users {
-  routePath = '/api/v2'
+  routePath = 'api/v2'
 
-  async newSignup({ data, token }) {
+  async signup({data, token}) {
     const form = new FormData();
 
     form.append('firstname', data.firstName);
@@ -42,7 +42,7 @@ class Users {
     return result;
   }
 
-  async newListUserInformation({ token }) {
+  async listUserInformation({token}) {
     const result = await RequestUtils.doRequest({
       method: 'get',
       route: `${this.routePath}/me`,
@@ -55,60 +55,58 @@ class Users {
     return result;
   }
 
-  async listUserInformation(token) {
-    const result = await RequestUtils.doGet({
-      route: `${this.routePath}/me`,
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-
-    return result
-  }
-
-  async listUserAddress({ token }) {
-    const result = await RequestUtils.doGet({
+  async listUserAddress({token}) {
+    const result = await RequestUtils.doRequest({
+      method: 'get',
       route: `${this.routePath}/me/addresses`,
       headers: {
-        Authorization: `Bearer ${token}`
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`
       }
     })
 
     return result
   }
 
-  async listUserAddress(token) {
-    const result = await RequestUtils.doGet({
-      route: `${this.routePath}/me/addresses`,
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-
-    return result
-  }
-
-  async userBalance(token) {
-    const result = await RequestUtils.doGet({
+  async userBalance({ token }) {
+    const result = await RequestUtils.doRequest({
+      method: 'get',
       route: `${this.routePath}/me/balance`,
       headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+        'Accept': 'application/json', 
+        'Authorization': `Bearer ${token}`
+      },
+    });
 
-    return result
+    return result;
   }
 
-  async insertBalanceWallet({data, token}) {
-    const result = await RequestUtils.doPost({
-      route: `${this.routePath}/register`,
-      data,
+  async insertBalanceWallet({ data, token }) {
+    const result = await RequestUtils.doRequest({
+      method: 'post',
+      route: `${this.routePath}/me/balance`,
       headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+        'Accept': 'application/json', 
+        'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${token}`
+      },
+      data: JSON.stringify(data)
+    });
 
-    return result
+    return result;
+  }
+
+  async listShipments({ status, token}) {
+    const result = await RequestUtils.doRequest({
+      method: 'get',
+      route: `${this.routePath}/me/orders?status=${status}`,
+      headers: {
+        'Accept': 'application/json', 
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    return result;
   }
 }
 module.exports = new Users();

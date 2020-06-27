@@ -1,6 +1,6 @@
 {
   "name": "melhor-envio-js",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "A package to integrate with melhor envio in javascript",
   "main": "index.js",
   "license": "ISC",
@@ -19,9 +19,9 @@
   "private": false,
   "author": "themsiqueirap",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/themsiqueira/melhorenvio/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/themsiqueira/melhorenvio/",
   "dependencies": {
     "axios": "^0.19.2",
     "form-data": "^3.0.0",
