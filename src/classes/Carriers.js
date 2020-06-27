@@ -1,18 +1,20 @@
 const RequestUtils = require('../utils/RequestUtils');
 
 class Carriers {
-  routePath = '/api/v2/me/shipment';
+  routePath = 'api/v2/me/shipment';
   
   async listCarriers() {
-    const result = await RequestUtils.doGet({
+    const result = await RequestUtils.doRequest({
+      method: 'get',
       route: `${this.routePath}/companies/`
     })
 
     return result
   }
 
-  async listCarrierInformation(id) {
-    const result = await RequestUtils.doGet({
+  async listCarrierInformation({ id }) {
+    const result = await RequestUtils.doRequest({
+      method: 'get',
       route: `${this.routePath}/companies/${id}`
     })
 
@@ -20,15 +22,17 @@ class Carriers {
   }
 
   async listServices() {
-    const result = await RequestUtils.doGet({
+    const result = await RequestUtils.doRequest({
+      method: 'get',
       route: `${this.routePath}/services/`
     })
 
     return result
   }
 
-  async listServiceInformation(id) {
-    const result = await RequestUtils.doGet({ 
+  async listServiceInformation({ id }) {
+    const result = await RequestUtils.doRequest({ 
+      method: 'get',
       route: `${this.routePath}/services/${id}`
     })
 
@@ -36,7 +40,8 @@ class Carriers {
   }
 
   async listAgencies() {
-    const result = await RequestUtils.doGet({
+    const result = await RequestUtils.doRequest({
+      method: 'get',
       route: `${this.routePath}/agencies/`
     })
 
@@ -44,20 +49,24 @@ class Carriers {
   }
 
   async listAgencyInformation() {
-    const result = await RequestUtils.doGet({ 
+    const result = await RequestUtils.doRequest({
+      method: 'get',
       route: `${this.routePath}/agencies/${id}`
     })
 
     return result
   }
 
-  async listFilterAgency(params) {
-    const result =  RequestUtils.doGet({
-      route: `${this.routePath}/services/`,
+  async listFilterAgency({ idTransportadora = null, country = null, state = null, city = null }) {
+    const haveCountry = country ? `&country=${country}` : '';
+    const haveState = state ? `&state=${state}` : '';
+    const haveCity = city ? `&city=${city}` : '';
+    const result =  RequestUtils.doRequest({
+      method: 'get',
+      route: `${this.routePath}/agencies?company=${idTransportadora}${haveCountry}${haveState}${haveCity}`,
       headers: {
-        'content-type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
-      query: params
     })
     
     return result

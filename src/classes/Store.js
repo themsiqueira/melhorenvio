@@ -1,73 +1,72 @@
+const RequestUtils = require('../utils/RequestUtils');
+
 class Store {
-  routePath = 'api/v2/me/companies'
+  routePath = 'api/v2/me/companies';
 
-  async signup() {
-    const result = await RequestUtils.doPost({
+  async signup({ data, token }) {
+    const result = await RequestUtils.doRequest({
+      method: 'post',
       route: `${this.routePath}`,
-      data,
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+      data: JSON.stringify(data),
+      headers: { 
+        'Accept': 'application/json', 
+        'Content-type': 'application/json', 
+        'Authorization': `Bearer ${token}`
+      },
+    });
 
-    return result
+    return result;
   }
 
   async saveAddress({id, data, token}) {
-    const result = await RequestUtils.doPost({
+    const result = await RequestUtils.doRequest({
+      method: 'post',
       route: `${this.routePath}/${id}/addresses`,
-      data,
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+      data: JSON.stringify(data),
+      headers: { 
+        'Content-type': 'application/json', 
+        'Accept': 'application/json', 
+        'Authorization': `Bearer ${token}`
+      },
     })
 
     return result
   }
 
   async savePhone({id, data, token}) {
-    const result = await RequestUtils.doPost({
+    const result = await RequestUtils.doRequest({
+      method: 'post',
       route: `${this.routePath}/${id}/phones`,
-      data,
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+      data: JSON.stringify(data),
+      headers: { 
+        'Content-type': 'application/json', 
+        'Accept': 'application/json', 
+        'Authorization': `Bearer ${token}`
+      },
     })
 
     return result
   }
 
-  async sendImage({id, data, token}) {
-    const form = new FormData();
-    form.append('file', data);
-
-    const result = await RequestUtils.doPostWithFormData({
-      route: `${this.routePath}/${id}/picture`,
-      form,
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-
-    return result
-  }
-
-  async listStores(token) {
-    const result = await RequestUtils.doGet({
+  async listStores({ token }) {
+    const result = await RequestUtils.doRequest({
+      method: 'get',
       route: `${this.routePath}`,
       headers: {
-        Authorization: `Bearer ${token}`
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`
       }
     })
-
     return result
   }
 
-  async visualizeStore({id, token}) {
-    const result = await RequestUtils.doGet({
+  async visualizeStore({ id, token }) {
+    const result = await RequestUtils.doRequest({
+      method: 'get',
       route: `${this.routePath}/${id}`,
       headers: {
-        Authorization: `Bearer ${token}`
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`
       }
     })
 
