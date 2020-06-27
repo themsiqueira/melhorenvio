@@ -48,7 +48,7 @@ class Carriers {
     return result
   }
 
-  async listAgencyInformation() {
+  async listAgencyInformation({ id }) {
     const result = await RequestUtils.doRequest({
       method: 'get',
       route: `${this.routePath}/agencies/${id}`
