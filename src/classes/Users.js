@@ -96,7 +96,7 @@ class Users {
     return result;
   }
 
-  async listShipments({ status, token}) {
+  async listShipments({status, token}) {
     const result = await RequestUtils.doRequest({
       method: 'get',
       route: `${this.routePath}/me/orders?status=${status}`,
