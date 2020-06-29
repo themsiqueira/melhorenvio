@@ -4,7 +4,7 @@ class RequestUtils {
     async doRequest({ route, method, headers = {}, data = {} }) {
         const config = {
             method,
-            url: `https://sandbox.melhorenvio.com.br/${route}`,
+            url: `https://melhorenvio.com.br/${route}`,
             headers,
             data
         };
