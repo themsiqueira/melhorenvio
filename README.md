@@ -15,7 +15,6 @@ Analogous to a **facade pattern** in architecture, **this package** is an **arra
 
 ### Contributing
 
-The purpose of this library is to motivate developers to constantly write a solid documentation and testing. A complete and nice looking documentation is key to a successful development and code maintainability.
 Please feel free to open any issues you might come up with and to submit your own PRs. There is not a contributing guide yet
 
 ### Contributors
